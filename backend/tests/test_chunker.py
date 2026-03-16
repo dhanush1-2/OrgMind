@@ -46,7 +46,7 @@ async def test_slack_short_message_is_one_chunk():
 @pytest.mark.asyncio
 async def test_too_short_content_discarded():
     """Content below minimum chunk size is dropped."""
-    doc = _make_doc("ok", SourceType.SLACK)
+    doc = _make_doc("ok.", SourceType.SLACK)
     agent = ChunkerAgent()
     result = await agent.run(_state(doc))
     assert result.chunks == []

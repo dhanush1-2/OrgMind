@@ -27,7 +27,7 @@ from app.models.documents import PipelineState, RawDocument, SourceType
 # ── Chunk size config ─────────────────────────────────────────────────────────
 _CHUNK_CHARS = 1500       # target chunk size in characters (~375 tokens)
 _OVERLAP_CHARS = 200      # overlap between consecutive chunks
-_MIN_CHUNK_CHARS = 100    # discard chunks shorter than this
+_MIN_CHUNK_CHARS = 20     # discard chunks shorter than this (Slack msgs are short)
 
 
 @dataclass
@@ -181,9 +181,9 @@ class ChunkerAgent(BaseAgent):
                     chunk = chunk[: boundary + 1]
             if len(chunk.strip()) >= _MIN_CHUNK_CHARS:
                 chunks.append(chunk.strip())
-            start += len(chunk) - _OVERLAP_CHARS
-            if start >= len(text):
-                break
+            # Always advance by at least 1 to prevent infinite loop
+            advance = max(1, len(chunk) - _OVERLAP_CHARS)
+            start += advance
         return chunks
 
     # ── Helpers ───────────────────────────────────────────────────────────────

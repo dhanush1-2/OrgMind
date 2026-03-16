@@ -56,9 +56,10 @@ async def test_configured_source_is_polled(state):
 async def test_unconfigured_source_is_skipped(state):
     """Unconfigured sources do not raise errors and return no docs."""
     agent = SourceMonitorAgent()
-    mock_source = AsyncMock()
+    mock_source = MagicMock()                        # sync mock — is_configured is sync
     mock_source.source_type = SourceType.NOTION
     mock_source.is_configured.return_value = False
+    mock_source.fetch_since = AsyncMock(return_value=[])
     agent._sources = [mock_source]
 
     with patch("app.agents.source_monitor.agent.get_redis"):

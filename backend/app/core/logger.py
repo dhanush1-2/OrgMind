@@ -14,7 +14,6 @@ from pathlib import Path
 import structlog
 
 _LOG_DIR = Path(__file__).resolve().parents[3] / "logs"
-_LOG_DIR.mkdir(exist_ok=True)
 
 
 def setup_logging() -> None:
@@ -25,6 +24,7 @@ def setup_logging() -> None:
     level = logging.DEBUG if is_dev else logging.INFO
 
     # ── stdlib root logger ────────────────────────────────────────────────────
+    _LOG_DIR.mkdir(exist_ok=True)
     handlers: list[logging.Handler] = [logging.StreamHandler(sys.stdout)]
     file_handler = logging.FileHandler(_LOG_DIR / "orgmind.log", encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
