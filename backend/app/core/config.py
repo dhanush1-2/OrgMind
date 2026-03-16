@@ -3,12 +3,16 @@ Application configuration — loaded once at startup from .env
 All settings are validated by Pydantic so a missing required var fails fast.
 """
 from functools import lru_cache
+from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Resolve .env from repo root (orgmind/.env) regardless of where uvicorn is launched from
+_ENV_FILE = Path(__file__).resolve().parents[3] / ".env"
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=str(_ENV_FILE),
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
