@@ -33,15 +33,18 @@ async def lifespan(app: FastAPI):
 
     from app.core.database import init_all_clients
     from app.core.neo4j_schema import apply_schema
+    from app.core.scheduler import start_scheduler, stop_scheduler
 
     await init_all_clients()
     await apply_schema()
+    start_scheduler()
 
     log.info("app.ready")
     yield
 
     # ── Shutdown ──────────────────────────────────────────────────────────────
     log.info("app.shutdown")
+    stop_scheduler()
     from app.core.database import close_all_clients
     await close_all_clients()
     log.info("app.stopped")
