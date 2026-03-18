@@ -82,14 +82,14 @@ def get_chroma() -> chromadb.AsyncHttpClient:
     return _chroma
 
 
-def _init_chroma() -> chromadb.AsyncHttpClient:
+async def _init_chroma() -> chromadb.AsyncHttpClient:
     log.info(
         "chroma.connecting",
         host=settings.chroma_host,
         port=settings.chroma_port,
     )
     try:
-        client = chromadb.AsyncHttpClient(
+        client = await chromadb.AsyncHttpClient(
             host=settings.chroma_host,
             port=settings.chroma_port,
         )
@@ -136,16 +136,10 @@ async def init_all_clients() -> None:
     _redis = _init_redis()
 
     # ChromaDB — only connect when running locally with Docker
-    if settings.environment == "development":
-        try:
-            _chroma = _init_chroma()
-        except Exception:
-            log.warning("chroma.skipped", reason="Could not reach ChromaDB — start Docker Compose")
-    else:
-        try:
-            _chroma = _init_chroma()
-        except Exception:
-            log.warning("chroma.skipped", reason="ChromaDB unreachable in production")
+    try:
+        _chroma = await _init_chroma()
+    except Exception:
+        log.warning("chroma.skipped", reason="Could not reach ChromaDB — start Docker Compose")
 
     # Verify Neo4j connectivity
     await _verify_neo4j()

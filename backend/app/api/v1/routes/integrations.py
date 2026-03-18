@@ -31,7 +31,7 @@ async def _check_neo4j() -> dict:
 async def _check_redis() -> dict:
     try:
         redis = get_redis()
-        await redis.ping()
+        redis.ping()  # Upstash REST client is synchronous
         return {"status": "connected"}
     except Exception as e:
         return {"status": "error", "error": str(e)}
@@ -39,8 +39,10 @@ async def _check_redis() -> dict:
 
 async def _check_chroma() -> dict:
     try:
-        chroma = get_chroma()
-        collections = await chroma.list_collections()
+        from app.core.database import _chroma
+        if _chroma is None:
+            return {"status": "unavailable", "reason": "ChromaDB not started (Docker required)"}
+        collections = await _chroma.list_collections()
         return {"status": "connected", "collections": len(collections)}
     except Exception as e:
         return {"status": "error", "error": str(e)}
@@ -65,7 +67,7 @@ async def get_integration_status():
             "redis": redis_status,
             "chromadb": chroma_status,
         }
-        all_ok = all(v.get("status") == "connected" for v in result.values())
+        all_ok = all(v.get("status") in ("connected", "unavailable") for v in result.values())
         log.info("api.integrations.complete", all_ok=all_ok)
         return {"integrations": result, "all_healthy": all_ok}
     except Exception as e:
