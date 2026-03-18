@@ -9,9 +9,15 @@ Every operation logs the step so errors are fully traceable.
 """
 from __future__ import annotations
 
-from typing import Optional
+from typing import Optional, Any
 
-import chromadb
+try:
+    import chromadb
+    _CHROMA_AVAILABLE = True
+except ImportError:
+    chromadb = None  # type: ignore[assignment]
+    _CHROMA_AVAILABLE = False
+
 from neo4j import AsyncGraphDatabase, AsyncDriver
 from supabase import create_client, Client as SupabaseClient
 from upstash_redis import Redis
@@ -25,7 +31,7 @@ settings = get_settings()
 # ── Singletons ────────────────────────────────────────────────────────────────
 _supabase: Optional[SupabaseClient] = None
 _neo4j: Optional[AsyncDriver] = None
-_chroma: Optional[chromadb.AsyncHttpClient] = None
+_chroma: Optional[Any] = None
 _redis: Optional[Redis] = None
 
 
@@ -74,15 +80,16 @@ def _init_neo4j() -> AsyncDriver:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ChromaDB
+# ChromaDB (optional — local Docker only)
 # ─────────────────────────────────────────────────────────────────────────────
-def get_chroma() -> chromadb.AsyncHttpClient:
-    if _chroma is None:
-        raise RuntimeError("ChromaDB client not initialised. Call init_all_clients() first.")
-    return _chroma
+def get_chroma() -> Any:
+    return _chroma  # may be None if not installed / not running
 
 
-async def _init_chroma() -> chromadb.AsyncHttpClient:
+async def _init_chroma() -> Any:
+    if not _CHROMA_AVAILABLE:
+        log.warning("chroma.skipped", reason="chromadb not installed (production mode)")
+        return None
     log.info(
         "chroma.connecting",
         host=settings.chroma_host,
