@@ -2,143 +2,78 @@
   {
     "id": "dec_001",
     "title": "Adopt PostgreSQL as primary database",
-    "rationale": "PostgreSQL is a powerful, open-source relational database that supports advanced data types and has strong support for concurrent transactions. This choice aligns with our needs for a scalable and reliable data storage solution. It also has a large community, ensuring there are plenty of resources available for troubleshooting and optimization.",
+    "rationale": "PostgreSQL is a powerful, open-source database that meets our needs for data storage and querying. It is widely used and well-supported, making it a great choice for our data pipeline tooling. The Data team is familiar with PostgreSQL, which will simplify our development process.",
     "date": "2022-02-15",
     "entities": [
       "PostgreSQL",
-      "MySQL",
-      "MongoDB"
+      "Data Pipeline",
+      "MySQL"
     ],
     "authors": [
       "Alice Chen",
       "Bob Martinez"
     ],
     "source_type": "GITHUB_ADR",
-    "confidence": 0.8
+    "confidence": 0.9
   },
   {
     "id": "dec_002",
-    "title": "Use Redis for caching",
-    "rationale": "Redis is an in-memory data store that can be used as a database, message broker, and cache. Its high performance and ability to handle high traffic make it an ideal choice for our caching needs. Additionally, its support for pub/sub messaging will be useful for our real-time data processing requirements.",
+    "title": "Use Apache Beam for data processing",
+    "rationale": "Apache Beam is a unified programming model for both batch and streaming data processing, which aligns well with our data pipeline goals. It supports a wide range of data sources and sinks, and has a large community of users and contributors. The Data team has experience with Apache Beam, which will speed up our development.",
     "date": "2022-03-01",
     "entities": [
-      "Redis",
-      "Memcached",
-      "Apache Ignite"
+      "Apache Beam",
+      "Data Processing",
+      "Apache Spark"
     ],
     "authors": [
-      "David Park"
+      "David Park",
+      "Eve Johnson"
+    ],
+    "source_type": "NOTION",
+    "confidence": 0.8
+  },
+  {
+    "id": "dec_003",
+    "title": "Implement Redis for caching",
+    "rationale": "Redis is an in-memory data store that can be used as a cache layer, which will improve the performance of our data pipeline tooling. It is widely used and well-supported, and has a simple and intuitive API. The Platform team has experience with Redis, which will simplify our implementation.",
+    "date": "2022-04-10",
+    "entities": [
+      "Redis",
+      "Caching",
+      "Memcached"
+    ],
+    "authors": [
+      "Carol Singh"
     ],
     "source_type": "SLACK",
     "confidence": 0.7
   },
   {
-    "id": "dec_003",
-    "title": "Implement data encryption using AWS KMS",
-    "rationale": "AWS KMS provides a secure way to manage encryption keys and encrypt data at rest and in transit. This ensures that our customers' sensitive data is protected and meets compliance requirements. Integrating with AWS services also simplifies our infrastructure setup.",
-    "date": "2022-04-10",
-    "entities": [
-      "AWS KMS",
-      "Google Cloud KMS",
-      "HashiCorp Vault"
-    ],
-    "authors": [
-      "Carol Singh",
-      "Eve Johnson"
-    ],
-    "source_type": "NOTION",
-    "confidence": 0.9
-  },
-  {
     "id": "dec_004",
-    "title": "Choose Apache Beam for data processing",
-    "rationale": "Apache Beam is a unified programming model for both batch and streaming data processing. Its flexibility and support for various data sources and sinks make it suitable for our data pipeline needs. Additionally, its open-source nature aligns with our strategy of leveraging community-driven projects.",
-    "date": "2022-05-05",
+    "title": "Choose Python as primary programming language",
+    "rationale": "Python is a popular and versatile programming language that is well-suited for data pipeline development. It has a large community of users and contributors, and a wide range of libraries and frameworks that support data processing and analysis. The Data team is familiar with Python, which will simplify our development process.",
+    "date": "2022-05-01",
     "entities": [
-      "Apache Beam",
-      "Apache Spark",
-      "Apache Flink"
+      "Python",
+      "Data Processing",
+      "Java"
     ],
     "authors": [
-      "Bob Martinez"
+      "Bob Martinez",
+      "David Park"
     ],
     "source_type": "GITHUB_ADR",
-    "confidence": 0.8
+    "confidence": 0.9
   },
   {
     "id": "dec_005",
-    "title": "Utilize Terraform for infrastructure management",
-    "rationale": "Terraform is a popular infrastructure as code tool that supports multiple cloud providers. Its state management capabilities and large community ensure that our infrastructure remains consistent and scalable. This choice also facilitates collaboration among our teams.",
-    "date": "2022-06-01",
-    "entities": [
-      "Terraform",
-      "AWS CloudFormation",
-      "Azure Resource Manager"
-    ],
-    "authors": [
-      "Alice Chen",
-      "David Park"
-    ],
-    "source_type": "SLACK",
-    "confidence": 0.85
-  },
-  {
-    "id": "dec_006",
-    "title": "Select Python as the primary programming language",
-    "rationale": "Python is a versatile and widely adopted language with extensive libraries for data science and engineering tasks. Its simplicity and readability make it an excellent choice for our data pipeline development. The large Python community also ensures there are plenty of resources for learning and troubleshooting.",
-    "date": "2022-07-10",
-    "entities": [
-      "Python",
-      "Java",
-      "Scala"
-    ],
-    "authors": [
-      "Carol Singh"
-    ],
-    "source_type": "NOTION",
-    "confidence": 0.95
-  },
-  {
-    "id": "dec_007",
-    "title": "Integrate with Apache Kafka for event-driven architecture",
-    "rationale": "Apache Kafka is a highly scalable and fault-tolerant messaging system that supports event-driven architectures. Its ability to handle high-throughput and provide low-latency data processing makes it suitable for our real-time data needs. Kafka's large ecosystem also ensures there are many tools and integrations available.",
-    "date": "2022-08-05",
-    "entities": [
-      "Apache Kafka",
-      "Amazon Kinesis",
-      "Google Cloud Pub/Sub"
-    ],
-    "authors": [
-      "Eve Johnson",
-      "Bob Martinez"
-    ],
-    "source_type": "GITHUB_ADR",
-    "confidence": 0.9
-  },
-  {
-    "id": "dec_008",
-    "title": "Use Docker for containerization",
-    "rationale": "Docker is a widely adopted containerization platform that simplifies application deployment and management. Its support for multiple operating systems and large community ensure that our containers remain portable and efficient. Docker also integrates well with our chosen orchestration tools.",
-    "date": "2022-09-01",
-    "entities": [
-      "Docker",
-      "Kubernetes",
-      "rkt"
-    ],
-    "authors": [
-      "David Park"
-    ],
-    "source_type": "SLACK",
-    "confidence": 0.8
-  },
-  {
-    "id": "dec_009",
-    "title": "Choose Kubernetes for container orchestration",
-    "rationale": "Kubernetes is a highly scalable and extensible container orchestration system that supports automated deployment and management. Its large community and extensive ecosystem ensure that our containerized applications remain reliable and efficient. Kubernetes also integrates well with our chosen containerization platform.",
-    "date": "2022-10-05",
+    "title": "Use Kubernetes for container orchestration",
+    "rationale": "Kubernetes is a popular and widely-used container orchestration platform that supports automated deployment, scaling, and management of containers. It is well-supported and has a large community of users and contributors. The Platform team has experience with Kubernetes, which will simplify our deployment process.",
+    "date": "2022-06-15",
     "entities": [
       "Kubernetes",
-      "Apache Mesos",
+      "Container Orchestration",
       "Docker Swarm"
     ],
     "authors": [
@@ -146,273 +81,345 @@
       "Carol Singh"
     ],
     "source_type": "NOTION",
-    "confidence": 0.9
+    "confidence": 0.8
   },
   {
-    "id": "dec_010",
-    "title": "Implement monitoring using Prometheus and Grafana",
-    "rationale": "Prometheus is a popular monitoring system that provides scalable and efficient metrics collection. Grafana is a visualization tool that integrates well with Prometheus and provides insights into our system's performance. This combination ensures that our teams have real-time visibility into our infrastructure and applications.",
-    "date": "2022-11-01",
+    "id": "dec_006",
+    "title": "Select AWS as primary cloud provider",
+    "rationale": "AWS is a popular and widely-used cloud provider that offers a wide range of services and features that support data pipeline development. It is well-supported and has a large community of users and contributors. The Platform team has experience with AWS, which will simplify our deployment process.",
+    "date": "2022-07-01",
     "entities": [
-      "Prometheus",
-      "Grafana",
-      "New Relic"
+      "AWS",
+      "Cloud Provider",
+      "Google Cloud"
+    ],
+    "authors": [
+      "David Park",
+      "Eve Johnson"
+    ],
+    "source_type": "SLACK",
+    "confidence": 0.7
+  },
+  {
+    "id": "dec_007",
+    "title": "Implement Apache Airflow for workflow management",
+    "rationale": "Apache Airflow is a popular and widely-used workflow management platform that supports automated scheduling and monitoring of workflows. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Airflow, which will simplify our workflow management.",
+    "date": "2022-08-10",
+    "entities": [
+      "Apache Airflow",
+      "Workflow Management",
+      "Apache NiFi"
     ],
     "authors": [
       "Bob Martinez",
-      "Eve Johnson"
+      "Carol Singh"
     ],
     "source_type": "GITHUB_ADR",
-    "confidence": 0.85
+    "confidence": 0.9
+  },
+  {
+    "id": "dec_008",
+    "title": "Use Terraform for infrastructure as code",
+    "rationale": "Terraform is a popular and widely-used infrastructure as code platform that supports automated deployment and management of infrastructure. It is well-supported and has a large community of users and contributors. The Platform team has experience with Terraform, which will simplify our infrastructure management.",
+    "date": "2022-09-01",
+    "entities": [
+      "Terraform",
+      "Infrastructure as Code",
+      "CloudFormation"
+    ],
+    "authors": [
+      "Alice Chen",
+      "David Park"
+    ],
+    "source_type": "NOTION",
+    "confidence": 0.8
+  },
+  {
+    "id": "dec_009",
+    "title": "Choose Apache Superset for data visualization",
+    "rationale": "Apache Superset is a popular and widely-used data visualization platform that supports a wide range of data sources and visualization types. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Superset, which will simplify our data visualization.",
+    "date": "2022-10-10",
+    "entities": [
+      "Apache Superset",
+      "Data Visualization",
+      "Tableau"
+    ],
+    "authors": [
+      "Eve Johnson",
+      "Carol Singh"
+    ],
+    "source_type": "SLACK",
+    "confidence": 0.7
+  },
+  {
+    "id": "dec_010",
+    "title": "Implement Memcached for caching",
+    "rationale": "Memcached is a popular and widely-used caching platform that supports high-performance caching. It is well-supported and has a large community of users and contributors. The Platform team has experience with Memcached, which will simplify our caching implementation.",
+    "date": "2022-11-01",
+    "entities": [
+      "Memcached",
+      "Caching",
+      "Redis"
+    ],
+    "authors": [
+      "Bob Martinez"
+    ],
+    "source_type": "GITHUB_ADR",
+    "confidence": 0.6
   },
   {
     "id": "dec_011",
-    "title": "Select Memcached for caching",
-    "rationale": "Memcached is a high-performance caching system that provides fast and efficient data storage. Its simplicity and ease of use make it an excellent choice for our caching needs. However, we should consider the trade-offs with our previous choice of Redis for caching.",
-    "date": "2022-11-15",
+    "title": "Use GitHub for version control",
+    "rationale": "GitHub is a popular and widely-used version control platform that supports automated deployment and management of code. It is well-supported and has a large community of users and contributors. The Data team has experience with GitHub, which will simplify our version control.",
+    "date": "2022-12-01",
     "entities": [
-      "Memcached",
-      "Redis",
-      "Apache Ignite"
+      "GitHub",
+      "Version Control",
+      "GitLab"
     ],
     "authors": [
+      "Alice Chen",
+      "David Park"
+    ],
+    "source_type": "NOTION",
+    "confidence": 0.9
+  },
+  {
+    "id": "dec_012",
+    "title": "Select Apache Kafka for messaging",
+    "rationale": "Apache Kafka is a popular and widely-used messaging platform that supports high-performance messaging. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Kafka, which will simplify our messaging implementation.",
+    "date": "2023-01-10",
+    "entities": [
+      "Apache Kafka",
+      "Messaging",
+      "RabbitMQ"
+    ],
+    "authors": [
+      "Eve Johnson",
+      "Carol Singh"
+    ],
+    "source_type": "SLACK",
+    "confidence": 0.8
+  },
+  {
+    "id": "dec_013",
+    "title": "Implement AWS Lambda for serverless computing",
+    "rationale": "AWS Lambda is a popular and widely-used serverless computing platform that supports automated deployment and management of serverless functions. It is well-supported and has a large community of users and contributors. The Platform team has experience with AWS Lambda, which will simplify our serverless computing implementation.",
+    "date": "2023-02-01",
+    "entities": [
+      "AWS Lambda",
+      "Serverless Computing",
+      "Google Cloud Functions"
+    ],
+    "authors": [
+      "Bob Martinez",
+      "David Park"
+    ],
+    "source_type": "GITHUB_ADR",
+    "confidence": 0.9
+  },
+  {
+    "id": "dec_014",
+    "title": "Choose Apache Cassandra for NoSQL database",
+    "rationale": "Apache Cassandra is a popular and widely-used NoSQL database that supports high-performance data storage and retrieval. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Cassandra, which will simplify our NoSQL database implementation.",
+    "date": "2023-03-10",
+    "entities": [
+      "Apache Cassandra",
+      "NoSQL Database",
+      "MongoDB"
+    ],
+    "authors": [
+      "Alice Chen",
+      "Eve Johnson"
+    ],
+    "source_type": "NOTION",
+    "confidence": 0.8
+  },
+  {
+    "id": "dec_015",
+    "title": "Use Docker for containerization",
+    "rationale": "Docker is a popular and widely-used containerization platform that supports automated deployment and management of containers. It is well-supported and has a large community of users and contributors. The Platform team has experience with Docker, which will simplify our containerization implementation.",
+    "date": "2023-04-01",
+    "entities": [
+      "Docker",
+      "Containerization",
+      "rkt"
+    ],
+    "authors": [
+      "Carol Singh",
       "David Park"
     ],
     "source_type": "SLACK",
     "confidence": 0.7
   },
   {
-    "id": "dec_012",
-    "title": "Use OAuth 2.0 for authentication",
-    "rationale": "OAuth 2.0 is a widely adopted authentication protocol that provides secure and efficient authentication flows. Its flexibility and support for multiple grant types make it suitable for our application's authentication needs. OAuth 2.0 also ensures that our customers' sensitive data is protected.",
-    "date": "2022-12-01",
-    "entities": [
-      "OAuth 2.0",
-      "OpenID Connect",
-      "SAML"
-    ],
-    "authors": [
-      "Carol Singh",
-      "Alice Chen"
-    ],
-    "source_type": "NOTION",
-    "confidence": 0.9
-  },
-  {
-    "id": "dec_013",
-    "title": "Choose Apache Airflow for workflow management",
-    "rationale": "Apache Airflow is a popular workflow management system that provides scalable and efficient workflow automation. Its support for multiple operators and sensors makes it suitable for our data pipeline needs. Airflow's large community also ensures that there are plenty of resources available for learning and troubleshooting.",
-    "date": "2023-01-05",
-    "entities": [
-      "Apache Airflow",
-      "Apache NiFi",
-      "Zapier"
-    ],
-    "authors": [
-      "Eve Johnson",
-      "Bob Martinez"
-    ],
-    "source_type": "GITHUB_ADR",
-    "confidence": 0.85
-  },
-  {
-    "id": "dec_014",
-    "title": "Utilize Apache Superset for data visualization",
-    "rationale": "Apache Superset is a fast and efficient data visualization tool that provides real-time insights into our data. Its support for multiple data sources and ease of use make it an excellent choice for our data visualization needs. Superset's large community also ensures that there are plenty of resources available for learning and troubleshooting.",
-    "date": "2023-02-01",
-    "entities": [
-      "Apache Superset",
-      "Tableau",
-      "Power BI"
-    ],
-    "authors": [
-      "David Park"
-    ],
-    "source_type": "SLACK",
-    "confidence": 0.8
-  },
-  {
-    "id": "dec_015",
-    "title": "Select Google Cloud Storage for object storage",
-    "rationale": "Google Cloud Storage is a highly scalable and durable object storage system that provides efficient data storage and retrieval. Its support for multiple storage classes and ease of use make it an excellent choice for our object storage needs. Google Cloud Storage also integrates well with our chosen data processing tools.",
-    "date": "2023-03-05",
-    "entities": [
-      "Google Cloud Storage",
-      "Amazon S3",
-      "Azure Blob Storage"
-    ],
-    "authors": [
-      "Alice Chen",
-      "Carol Singh"
-    ],
-    "source_type": "NOTION",
-    "confidence": 0.9
-  },
-  {
     "id": "dec_016",
-    "title": "Implement logging using ELK Stack",
-    "rationale": "The ELK Stack (Elasticsearch, Logstash, Kibana) is a popular logging solution that provides scalable and efficient log collection, processing, and visualization. Its support for multiple data sources and ease of use make it an excellent choice for our logging needs. The ELK Stack also integrates well with our chosen monitoring tools.",
-    "date": "2023-04-01",
+    "title": "Implement Apache HBase for Hadoop database",
+    "rationale": "Apache HBase is a popular and widely-used Hadoop database that supports high-performance data storage and retrieval. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache HBase, which will simplify our Hadoop database implementation.",
+    "date": "2023-05-10",
     "entities": [
-      "ELK Stack",
-      "Splunk",
-      "Sumo Logic"
+      "Apache HBase",
+      "Hadoop Database",
+      "Apache Cassandra"
     ],
     "authors": [
       "Bob Martinez",
       "Eve Johnson"
     ],
     "source_type": "GITHUB_ADR",
-    "confidence": 0.85
+    "confidence": 0.9
   },
   {
     "id": "dec_017",
-    "title": "Choose Apache Cassandra for NoSQL database",
-    "rationale": "Apache Cassandra is a highly scalable and fault-tolerant NoSQL database that provides efficient data storage and retrieval. Its support for multiple data models and ease of use make it an excellent choice for our NoSQL database needs. Cassandra's large community also ensures that there are plenty of resources available for learning and troubleshooting.",
-    "date": "2023-05-05",
+    "title": "Choose Google Cloud Storage for object storage",
+    "rationale": "Google Cloud Storage is a popular and widely-used object storage platform that supports high-performance data storage and retrieval. It is well-supported and has a large community of users and contributors. The Platform team has experience with Google Cloud Storage, which will simplify our object storage implementation.",
+    "date": "2023-06-01",
     "entities": [
-      "Apache Cassandra",
-      "MongoDB",
-      "Couchbase"
+      "Google Cloud Storage",
+      "Object Storage",
+      "AWS S3"
     ],
     "authors": [
-      "David Park"
+      "Alice Chen",
+      "Carol Singh"
     ],
-    "source_type": "SLACK",
+    "source_type": "NOTION",
     "confidence": 0.8
   },
   {
     "id": "dec_018",
-    "title": "Utilize CircleCI for continuous integration",
-    "rationale": "CircleCI is a popular continuous integration tool that provides scalable and efficient automated testing and deployment. Its support for multiple programming languages and ease of use make it an excellent choice for our continuous integration needs. CircleCI also integrates well with our chosen version control system.",
-    "date": "2023-06-01",
+    "title": "Use Apache ZooKeeper for configuration management",
+    "rationale": "Apache ZooKeeper is a popular and widely-used configuration management platform that supports automated deployment and management of configurations. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache ZooKeeper, which will simplify our configuration management implementation.",
+    "date": "2023-07-10",
     "entities": [
-      "CircleCI",
-      "Jenkins",
-      "Travis CI"
+      "Apache ZooKeeper",
+      "Configuration Management",
+      "Etcd"
     ],
     "authors": [
-      "Carol Singh",
-      "Alice Chen"
+      "David Park",
+      "Eve Johnson"
     ],
-    "source_type": "NOTION",
-    "confidence": 0.9
+    "source_type": "SLACK",
+    "confidence": 0.7
   },
   {
     "id": "dec_019",
-    "title": "Select Datadog for monitoring and analytics",
-    "rationale": "Datadog is a comprehensive monitoring and analytics platform that provides real-time insights into our infrastructure and applications. Its support for multiple data sources and ease of use make it an excellent choice for our monitoring and analytics needs. Datadog also integrates well with our chosen logging tools.",
-    "date": "2023-07-05",
+    "title": "Implement Elasticsearch for search and analytics",
+    "rationale": "Elasticsearch is a popular and widely-used search and analytics platform that supports high-performance search and analytics. It is well-supported and has a large community of users and contributors. The Data team has experience with Elasticsearch, which will simplify our search and analytics implementation.",
+    "date": "2023-08-01",
     "entities": [
-      "Datadog",
-      "New Relic",
-      "Splunk"
+      "Elasticsearch",
+      "Search and Analytics",
+      "Apache Solr"
     ],
     "authors": [
-      "Eve Johnson",
-      "Bob Martinez"
+      "Bob Martinez",
+      "Carol Singh"
     ],
     "source_type": "GITHUB_ADR",
-    "confidence": 0.85
+    "confidence": 0.9
   },
   {
     "id": "dec_020",
-    "title": "Choose HashiCorp Vault for secrets management",
-    "rationale": "HashiCorp Vault is a popular secrets management tool that provides secure and efficient storage and retrieval of sensitive data. Its support for multiple secret engines and ease of use make it an excellent choice for our secrets management needs. Vault's large community also ensures that there are plenty of resources available for learning and troubleshooting.",
-    "date": "2023-08-01",
+    "title": "Choose Apache Flume for data ingestion",
+    "rationale": "Apache Flume is a popular and widely-used data ingestion platform that supports automated deployment and management of data ingestion. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Flume, which will simplify our data ingestion implementation.",
+    "date": "2023-09-10",
     "entities": [
-      "HashiCorp Vault",
-      "AWS Secrets Manager",
-      "Google Cloud Secret Manager"
+      "Apache Flume",
+      "Data Ingestion",
+      "Apache NiFi"
     ],
     "authors": [
+      "Alice Chen",
       "David Park"
     ],
-    "source_type": "SLACK",
+    "source_type": "NOTION",
     "confidence": 0.8
   },
   {
     "id": "dec_021",
-    "title": "Implement alerting using PagerDuty",
-    "rationale": "PagerDuty is a popular alerting tool that provides scalable and efficient incident management. Its support for multiple notification channels and ease of use make it an excellent choice for our alerting needs. PagerDuty also integrates well with our chosen monitoring tools.",
-    "date": "2023-09-05",
+    "title": "Use Apache Spark for batch processing",
+    "rationale": "Apache Spark is a popular and widely-used batch processing platform that supports high-performance batch processing. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Spark, which will simplify our batch processing implementation.",
+    "date": "2023-10-01",
     "entities": [
-      "PagerDuty",
-      "Splunk On-Call",
-      "VictorOps"
+      "Apache Spark",
+      "Batch Processing",
+      "Apache Flink"
     ],
     "authors": [
-      "Alice Chen",
+      "Eve Johnson",
       "Carol Singh"
     ],
-    "source_type": "NOTION",
-    "confidence": 0.9
+    "source_type": "SLACK",
+    "confidence": 0.7
   },
   {
     "id": "dec_022",
-    "title": "Utilize GitHub for version control",
-    "rationale": "GitHub is a popular version control system that provides scalable and efficient code management. Its support for multiple programming languages and ease of use make it an excellent choice for our version control needs. GitHub also integrates well with our chosen continuous integration tools.",
-    "date": "2023-10-01",
+    "title": "Implement Apache Hive for data warehousing",
+    "rationale": "Apache Hive is a popular and widely-used data warehousing platform that supports automated deployment and management of data warehousing. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Hive, which will simplify our data warehousing implementation.",
+    "date": "2023-11-10",
     "entities": [
-      "GitHub",
-      "GitLab",
-      "Bitbucket"
+      "Apache Hive",
+      "Data Warehousing",
+      "Amazon Redshift"
+    ],
+    "authors": [
+      "Bob Martinez",
+      "David Park"
+    ],
+    "source_type": "GITHUB_ADR",
+    "confidence": 0.9
+  },
+  {
+    "id": "dec_023",
+    "title": "Choose MongoDB for document database",
+    "rationale": "MongoDB is a popular and widely-used document database that supports high-performance data storage and retrieval. It is well-supported and has a large community of users and contributors. The Data team has experience with MongoDB, which will simplify our document database implementation.",
+    "date": "2023-12-01",
+    "entities": [
+      "MongoDB",
+      "Document Database",
+      "Apache Cassandra"
+    ],
+    "authors": [
+      "Alice Chen",
+      "Eve Johnson"
+    ],
+    "source_type": "NOTION",
+    "confidence": 0.8
+  },
+  {
+    "id": "dec_024",
+    "title": "Use Apache Storm for real-time processing",
+    "rationale": "Apache Storm is a popular and widely-used real-time processing platform that supports automated deployment and management of real-time processing. It is well-supported and has a large community of users and contributors. The Data team has experience with Apache Storm, which will simplify our real-time processing implementation.",
+    "date": "2024-01-10",
+    "entities": [
+      "Apache Storm",
+      "Real-time Processing",
+      "Apache Flink"
+    ],
+    "authors": [
+      "Carol Singh",
+      "David Park"
+    ],
+    "source_type": "SLACK",
+    "confidence": 0.7
+  },
+  {
+    "id": "dec_025",
+    "title": "Implement AWS Glue for data cataloging",
+    "rationale": "AWS Glue is a popular and widely-used data cataloging platform that supports automated deployment and management of data cataloging. It is well-supported and has a large community of users and contributors. The Data team has experience with AWS Glue, which will simplify our data cataloging implementation.",
+    "date": "2024-02-01",
+    "entities": [
+      "AWS Glue",
+      "Data Cataloging",
+      "Apache Atlas"
     ],
     "authors": [
       "Bob Martinez",
       "Eve Johnson"
     ],
     "source_type": "GITHUB_ADR",
-    "confidence": 0.85
-  },
-  {
-    "id": "dec_023",
-    "title": "Choose Apache ZooKeeper for configuration management",
-    "rationale": "Apache ZooKeeper is a popular configuration management tool that provides scalable and efficient management of distributed systems. Its support for multiple configuration models and ease of use make it an excellent choice for our configuration management needs. ZooKeeper's large community also ensures that there are plenty of resources available for learning and troubleshooting.",
-    "date": "2023-11-05",
-    "entities": [
-      "Apache ZooKeeper",
-      "etcd",
-      "Consul"
-    ],
-    "authors": [
-      "David Park"
-    ],
-    "source_type": "SLACK",
-    "confidence": 0.8
-  },
-  {
-    "id": "dec_024",
-    "title": "Select AWS Lambda for serverless computing",
-    "rationale": "AWS Lambda is a popular serverless computing platform that provides scalable and efficient execution of code. Its support for multiple programming languages and ease of use make it an excellent choice for our serverless computing needs. AWS Lambda also integrates well with our chosen data processing tools.",
-    "date": "2023-12-01",
-    "entities": [
-      "AWS Lambda",
-      "Google Cloud Functions",
-      "Azure Functions"
-    ],
-    "authors": [
-      "Carol Singh",
-      "Alice Chen"
-    ],
-    "source_type": "NOTION",
     "confidence": 0.9
-  },
-  {
-    "id": "dec_025",
-    "title": "Utilize Snowflake for data warehousing",
-    "rationale": "Snowflake is a popular data warehousing platform that provides scalable and efficient data storage and analytics. Its support for multiple data sources and ease of use make it an excellent choice for our data warehousing needs. Snowflake also integrates well with our chosen data processing tools.",
-    "date": "2024-01-05",
-    "entities": [
-      "Snowflake",
-      "Amazon Redshift",
-      "Google BigQuery"
-    ],
-    "authors": [
-      "Eve Johnson",
-      "Bob Martinez"
-    ],
-    "source_type": "GITHUB_ADR",
-    "confidence": 0.85
   }
 ]
