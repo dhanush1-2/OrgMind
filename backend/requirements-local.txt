@@ -1,0 +1,3 @@
+# Local development extras (requires Docker for ChromaDB)
+-r requirements.txt
+chromadb==0.5.23
