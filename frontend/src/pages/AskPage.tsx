@@ -17,48 +17,49 @@ export default function AskPage() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!input.trim() || streaming) return;
 
     const query = input.trim();
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: query }]);
     setStreaming(true);
 
-    const es = streamQuery(query);
-    let assistantText = "";
+    // Add user message + empty assistant placeholder
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", content: query },
+      { role: "assistant", content: "" },
+    ]);
 
-    setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
-
-    es.onmessage = (ev) => {
-      if (ev.data === "[DONE]") {
-        es.close();
-        setStreaming(false);
-        return;
-      }
-      assistantText += ev.data;
-      setMessages((prev) => {
-        const next = [...prev];
-        next[next.length - 1] = { role: "assistant", content: assistantText };
-        return next;
-      });
-    };
-
-    es.onerror = () => {
-      es.close();
-      setStreaming(false);
-      if (!assistantText) {
+    await streamQuery(
+      query,
+      // onChunk — append each piece to the last message
+      (chunk) => {
         setMessages((prev) => {
           const next = [...prev];
           next[next.length - 1] = {
             role: "assistant",
-            content: "Error: Could not reach the backend.",
+            content: next[next.length - 1].content + chunk,
           };
           return next;
         });
+      },
+      // onDone
+      () => setStreaming(false),
+      // onError
+      (msg) => {
+        setMessages((prev) => {
+          const next = [...prev];
+          const last = next[next.length - 1];
+          if (!last.content) {
+            next[next.length - 1] = { role: "assistant", content: `Error: ${msg}` };
+          }
+          return next;
+        });
+        setStreaming(false);
       }
-    };
+    );
   }
 
   return (
@@ -76,8 +77,7 @@ export default function AskPage() {
             <p className="text-4xl mb-3">🧠</p>
             <p className="text-lg">Ask anything about past decisions</p>
             <p className="text-sm mt-1">
-              e.g. "Why did we choose PostgreSQL?" or "What database decisions
-              conflict?"
+              e.g. "Why did we choose PostgreSQL?" or "What database decisions conflict?"
             </p>
           </div>
         )}
@@ -87,7 +87,7 @@ export default function AskPage() {
             className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-2xl px-4 py-3 rounded-xl text-sm leading-relaxed ${
+              className={`max-w-2xl px-4 py-3 rounded-xl text-sm leading-relaxed whitespace-pre-wrap ${
                 m.role === "user"
                   ? "bg-indigo-600 text-white"
                   : "bg-gray-800 text-gray-100"
@@ -118,7 +118,11 @@ export default function AskPage() {
           disabled={streaming || !input.trim()}
           className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 px-4 py-2 rounded-lg transition-colors"
         >
-          {streaming ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+          {streaming ? (
+            <Loader2 size={16} className="animate-spin" />
+          ) : (
+            <Send size={16} />
+          )}
         </button>
       </form>
     </div>
